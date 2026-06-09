@@ -1,30 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Cipher_Notes.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace Cipher_Notes.Services
 {
     public class NoteService
     {
-        //declaring variables
-        private DatabaseService databaseService;
+        private readonly DatabaseService databaseService;
+        private readonly EncryptionService encryptionService;
 
-        private EncryptionService encryptionService;
-
-        //declare constructor
-        public NoteService()
+        public NoteService(DatabaseService db, EncryptionService crypto)
         {
-
+            databaseService = db;
+            encryptionService = crypto;
         }
 
-        //create note method
-        public void CreateNote(string title, string content, string password)
+        public async Task CreateNote(string title, string content, string password)
         {
-            //try-catch method to handle unexpected errors
             try
             {
-                
-            }catch(Exception ex)
+                var (cipher, salt, iv) = encryptionService.EncryptNote(content, password);
+
+                var note = new SecureNotes
+                {
+                    Title = title,
+                    Encrypted_content = cipher,
+                    Salt = salt,
+                    IV = iv,
+                    Created_at = DateTime.Now
+                };
+
+                await databaseService.Create(note);
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Cannot create the note", ex);
             }

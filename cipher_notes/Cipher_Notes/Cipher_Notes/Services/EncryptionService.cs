@@ -22,7 +22,7 @@ namespace Cipher_Notes.Services
 
 
         //encrypt note method
-        public String EncryptNote(string content, string password)
+        public (string CipherText, string Salt, string IV) EncryptNote(string content, string password)
         {
             string salt = GenerateSalt(); //generate salt using GenerateSalt() method
 
@@ -60,7 +60,7 @@ namespace Cipher_Notes.Services
                 string CipherText = Convert.ToBase64String(ms.ToArray());
 
                 //return salt,iv and encrypted content
-                return CipherText;
+                return (CipherText, salt, iv);
             }
             catch(CryptographicException e)
             {
