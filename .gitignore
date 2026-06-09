@@ -1,5 +1,28 @@
+# Visual Studio
 .vs/
-bin/
-obj/
 *.user
 *.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+bin/
+obj/
+out/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Logs
+*.log
+
+# Rider / Resharper (αν το έχεις)
+.idea/
+*.DotSettings.user
+
+# OS files
+.DS_Store
+Thumbs.db
