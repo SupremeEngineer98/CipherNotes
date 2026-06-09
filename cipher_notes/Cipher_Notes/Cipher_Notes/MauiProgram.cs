@@ -14,6 +14,8 @@ namespace Cipher_Notes
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
+            builder.Services.AddTransient<MainPage>();
+
             builder.Services.AddMauiBlazorWebView();
 
 #if DEBUG

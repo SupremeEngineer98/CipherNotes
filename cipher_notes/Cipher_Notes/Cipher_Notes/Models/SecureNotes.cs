@@ -11,19 +11,25 @@ namespace Cipher_Notes.Models
         //declaring properties with public setter and getter properties!
 
         [PrimaryKey, AutoIncrement]
-        public int id { get; set; }
+        public int Ιd { get; set; }
 
-        public String title { get; set; }
+        [NotNull]
+        public String Title { get; set; } = string.Empty;
 
-        public String encrypted_content { get; set; }
+        [NotNull]
+        public String Encrypted_content { get; set; } = string.Empty;
 
-        public String salt { get; set; }
+        [NotNull]
+        public String Salt { get; set; } = string.Empty;
 
-        public String i_v { get; set; }
+        [NotNull]
+        public String IV { get; set; } = string.Empty;
 
-        public DateTime created_at { get; set; }
+        [NotNull]
+        public DateTime Created_at { get; set; } 
 
-        public DateTime updated_at { get; set; }
+        
+        public DateTime Updated_at { get; set; }
 
 
     }
