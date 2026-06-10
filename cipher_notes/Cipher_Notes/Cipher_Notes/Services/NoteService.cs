@@ -1,5 +1,6 @@
 ﻿using Cipher_Notes.Models;
 using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Cipher_Notes.Services
@@ -15,6 +16,7 @@ namespace Cipher_Notes.Services
             encryptionService = crypto;
         }
 
+        //create note method
         public async Task CreateNote(string title, string content, string password)
         {
             try
@@ -36,6 +38,11 @@ namespace Cipher_Notes.Services
             {
                 throw new Exception("Cannot create the note", ex);
             }
+
+
+            //update note method
+
+            public async Task UpdateNote(int id,string title, string content)
         }
     }
-}
+}   
