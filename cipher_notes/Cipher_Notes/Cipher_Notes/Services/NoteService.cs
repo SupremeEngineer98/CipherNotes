@@ -36,13 +36,66 @@ namespace Cipher_Notes.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Cannot create the note", ex);
+                throw new Exception(ex.Message, ex);
             }
+        }
 
 
             //update note method
+            public async Task UpdateNote(int id,string title, string content, string password)
+             {
 
-            public async Task UpdateNote(int id,string title, string content)
+            //try catch to handle unexpected errors
+            try
+            {
+                // first decrypt content
+
+                //loading note
+                var existingNote = await databaseService.GetById(id);
+
+
+                //validate password
+                try
+                {
+                    var decrypted_note = encryptionService.DecryptContent
+                   (
+                       existingNote.Encrypted_content,
+                       password,
+                       existingNote.Salt,
+                       existingNote.IV
+                   );
+
+                }
+                catch 
+                {
+                    throw new Exception("Incorrect password");
+                }
+
+                //encrypt updated content
+                var (cipher, salt, iv) = encryptionService.EncryptNote(content,password);
+
+                //update note
+                    existingNote.Title = title;
+                    existingNote.Encrypted_content = cipher;
+                    existingNote.Salt = salt;
+                    existingNote.IV = iv;
+                existingNote.Updated_at = DateTime.Now;       
+                
+                //send query in the DB
+                await databaseService.Update(existingNote);
+
+            }
+            catch (Exception ex) 
+            {
+                //return error message
+                throw new Exception(ex.Message, ex);
+            
+            }
+                   
+
+
+
+
+             }
         }
     }
-}   
