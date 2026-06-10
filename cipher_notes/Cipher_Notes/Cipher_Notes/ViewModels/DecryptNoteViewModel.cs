@@ -37,10 +37,8 @@ namespace Cipher_Notes.ViewModels
             try
             {
                 //if all goes well use the decrypt method from NoteService
-                decrypted_content = await note_service.DecryptNote(id, password);   
+                Decrypted_content = await note_service.DecryptNote(id, password);   
 
-                //use on property changed to update UI immediately
-                OnPropertyChanged(nameof(decrypted_content));
                 
               
 
