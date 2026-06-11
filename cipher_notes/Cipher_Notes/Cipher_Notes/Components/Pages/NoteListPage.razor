@@ -115,15 +115,8 @@
     private async Task DeleteNote(int id)
     {
 
-        //prompt user to validate note's deletion
-        bool confirm = await App.Current.MainPage.DisplayAlertAsync(
-                 "Confirm",
-                 "Are you sure you want to delete?",
-                 "Yes",
-                 "No");
-
         //delete note if user confirm
-        if(confirm)
+        if(await ConfirmDeletion())
         {
             //call delete note method
             await NoteService.Delete(id);
@@ -132,7 +125,24 @@
 
             await App.Current.MainPage.DisplayAlertAsync("alert", "Note deleted!","BACK");    //return confirmation message
         }
+        else
+        {
+            await App.Current.MainPage.DisplayAlertAsync("alert", "Note has not been deleted","BACK");  //inform user that the note has not been deleted
+        }
         
+    }
+
+    //confirm deletion method
+    private async Task<bool> ConfirmDeletion()
+    {
+        
+        //prompt user to validate note's deletion
+        return await App.Current.MainPage.DisplayAlertAsync(
+                 "Confirm",
+                 "Are you sure you want to delete?",
+                 "OK",
+                 "CANCEL");
+
     }
 
     private void GoToCreate()
