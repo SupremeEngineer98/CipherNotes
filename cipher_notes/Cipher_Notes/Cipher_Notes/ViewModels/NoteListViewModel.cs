@@ -78,7 +78,7 @@ namespace Cipher_Notes.ViewModels
             }
             catch (Exception ex) 
             {
-                await Shell.Current.DisplayAlertAsync("Error", ex.Message, "OK");
+                throw;
             }
 
             

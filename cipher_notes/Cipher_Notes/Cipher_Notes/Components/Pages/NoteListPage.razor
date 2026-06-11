@@ -3,6 +3,7 @@
 
 @page "/"
 @inject NoteService NoteService
+@inject NavigationManager Navigation
 
 <div class="container">
     <div class="header">
@@ -38,7 +39,7 @@
         </div>
     }
 
-    <button class="new-note-btn" @onclick="GoToCreate">+ New Encrypted Note</button>
+    <button class="new-note-btn" @onclick="GoToCreate">+ Create Note</button>
 </div>
 
 @code {
@@ -56,5 +57,6 @@
     private void GoToCreate()
     {
         // navigation to create note
+        Navigation.NavigateTo("/create");
     }
 }

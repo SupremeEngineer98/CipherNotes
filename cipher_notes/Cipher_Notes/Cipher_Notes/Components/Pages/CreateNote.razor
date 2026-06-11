@@ -1,0 +1,85 @@
+﻿@using Cipher_Notes.Models
+@using Cipher_Notes.Services
+@using Cipher_Notes.ViewModels
+@using Cipher_Notes.Models
+
+@page "/create"
+@inject NoteService NoteService
+@inject NavigationManager Navigation
+
+
+
+
+<div class="container">
+    <div class="header">
+        <button class="back-btn" @onclick="GoBack">← Back</button>
+        <h1>New Note</h1>
+    </div>
+
+    <div class="form-group">
+        <label>TITLE</label>
+        <input type="text" placeholder="Note title..." @bind="title" />
+    </div>
+
+    <div class="form-group">
+        <label>CONTENT</label>
+        <textarea placeholder="Write your note here..." @bind="content"></textarea>
+    </div>
+
+    <div class="password-section">
+        <label>🔒 ENCRYPTION PASSWORD</label>
+        <input type="password" placeholder="Set encryption password" @bind="password" />
+        <input type="password" placeholder="Confirm password" @bind="confirmPassword" />
+        <small>This password encrypts your note. It cannot be recovered if lost.</small>
+    </div>
+
+    <div class="buttons">
+        <button class="cancel-btn" @onclick="GoBack">Cancel</button>
+        <button class="save-btn" @onclick="SaveNote">Encrypt & Save</button>
+    </div>
+</div>
+
+@code {
+    private string title = "";
+    private string content = "";
+    private string password = "";
+    private string confirmPassword = "";
+
+    private async Task SaveNote()
+    {
+
+      
+
+        //try-catch to handle errors
+        try
+        {
+            //return an error message for null inputs
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content) || string.IsNullOrWhiteSpace(password))
+            { 
+                await Application.Current.MainPage.DisplayAlert("Error", "Please fill out all inputs", "OK");
+                return;
+            }
+
+
+            if (password != confirmPassword) //return an error if passwords do not match
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Passwords do not match", "OK");
+                return;
+            }
+           
+
+        }catch(Exception ex) //throw a general exception message if sth goes wrong
+        {
+            await Shell.Current.DisplayAlertAsync("Error", ex.Message, "OK");
+        }
+        
+
+        await NoteService.CreateNote(title, content, password);
+        Navigation.NavigateTo("/");
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/");
+    }
+}
