@@ -154,3 +154,104 @@ body {
     width: 48px;
     height: 48px;
 }
+
+
+Πρόσθεσε αυτό στο τέλος του app.css:
+css
+/* CreateNote Page */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    font-size: 11px;
+    color: #00c9a7;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    background: #1c2128;
+    border: 1px solid #2d3748;
+    border-radius: 12px;
+    padding: 14px;
+    color: white;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    height: 150px;
+    resize: none;
+}
+
+.password-section {
+    background: #0d2420;
+    border: 1px solid #00c9a7;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+    .password-section label {
+        font-size: 11px;
+        color: #00c9a7;
+        letter-spacing: 1px;
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    .password-section input {
+        width: 100%;
+        background: #1c2128;
+        border: 1px solid #2d3748;
+        border-radius: 10px;
+        padding: 14px;
+        color: white;
+        font-size: 15px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    .password-section small {
+        color: #00c9a7;
+        font-size: 12px;
+    }
+
+.buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.cancel-btn {
+    flex: 1;
+    padding: 16px;
+    border-radius: 12px;
+    border: none;
+    background: #1c2128;
+    color: white;
+    font-size: 15px;
+}
+
+.save-btn {
+    flex: 1;
+    padding: 16px;
+    border-radius: 12px;
+    border: none;
+    background: #00c9a7;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #00c9a7;
+    font-size: 15px;
+    margin-bottom: 8px;
+    padding: 0;
+}
