@@ -114,13 +114,15 @@ namespace Cipher_Notes.Services
                 throw new UnauthorizedAccessException("Wrong password");
             }
 
-            catch (Exception ex) //return an error message if decryption failed at all
+            catch (FormatException)
             {
-                throw new KeyNotFoundException("Error.Decryption failed", ex);
+                throw new UnauthorizedAccessException("Wrong password");
             }
-               
 
-            }
+
+
+
+        }
 
 
             //update note method

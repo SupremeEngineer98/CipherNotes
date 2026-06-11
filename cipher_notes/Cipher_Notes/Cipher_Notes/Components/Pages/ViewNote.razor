@@ -50,7 +50,7 @@ else
         //return to the main page is note is null
         if (note is null)
         {
-            await App.Current.MainPage.DisplayAlertAsync(
+            await App.Current.MainPage.DisplayAlertAsync( //display an error message if note does not exist
                 "Error",
                 "Note not found.",
                 "OK");

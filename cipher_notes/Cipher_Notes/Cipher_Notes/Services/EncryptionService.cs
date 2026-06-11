@@ -109,7 +109,7 @@ namespace Cipher_Notes.Services
             }
             catch(CryptographicException e)
             {
-                throw new InvalidOperationException("Content decryption failed", e);
+                throw new InvalidOperationException("Wrong password or corrupted data.Try again", e);
             }
 
         }
