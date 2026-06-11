@@ -149,3 +149,8 @@ body {
     border-radius: 12px;
     margin-bottom: 10px;
 }
+
+.logo-img {
+    width: 48px;
+    height: 48px;
+}

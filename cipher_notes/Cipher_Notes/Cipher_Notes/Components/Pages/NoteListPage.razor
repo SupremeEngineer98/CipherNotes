@@ -7,20 +7,20 @@
 <div class="container">
     <div class="header">
         <div class="logo">
-            <span class="shield-icon">🛡️</span>
+            <img src="images/logo.svg" class="logo-img" />
             <div>
-                <h1>SecureNotes</h1>
+                <h1>Cipher Notes</h1>
                 <p>@notes.Count notes encrypted</p>
             </div>
         </div>
     </div>
 
-    <input type="text" placeholder="🔍 Search notes..." class="search-bar" @bind="searchQuery" />
+ 
 
     @if (notes.Count == 0)
     {
         <div class="empty-state">
-            <span class="shield-big">🛡️</span>
+            <img src="images/logo.svg" class="logo-img" />
             <h2>No notes yet</h2>
             <p>Tap + to create your first encrypted note</p>
         </div>
@@ -55,6 +55,6 @@
 
     private void GoToCreate()
     {
-        // navigation εδώ
+        // navigation to create note
     }
 }
