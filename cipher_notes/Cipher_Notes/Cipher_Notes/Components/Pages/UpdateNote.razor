@@ -84,6 +84,15 @@
         //try-catch method
         try
         {
+            //if password is null return an error message
+            if (!await ValidPassword())
+            {
+                await App.Current.MainPage.DisplayAlertAsync(
+               "Error",
+               "Password field is null",
+               "OK");
+                return;
+            }
             //decrypt content
             //assign method into decryptedContent variable
             decryptedContent = await NoteService.DecryptNote(Id, password);
@@ -117,23 +126,58 @@
     {
         try
         {
-            //if user confirms the update, update the note
-            if (await ConfirmUpdate())
+            //return an error if any input is null
+            if (await ValidNoteInputs())
             {
-                await NoteService.UpdateNote(Id, note.Title, decryptedContent, password);//call the update note method from note service to update data
-                                                                                         //return an success message
-                await App.Current.MainPage.DisplayAlertAsync("Success", "Note has been updated", "OK");
+                //if user confirms the update, update the note
+                if (await ConfirmUpdate())
+                {
+                    await NoteService.UpdateNote(Id, note.Title, decryptedContent, password);//call the update note method from note service to update data
+                    //return an success message
+                    await App.Current.MainPage.DisplayAlertAsync("Success", "Note has been updated", "OK");
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlertAsync("Cancel", "You didn't update note", "OK");
+                }
             }
             else
             {
-                await App.Current.MainPage.DisplayAlertAsync("Cancel", "You didn't update note", "OK");
+                await App.Current.MainPage.DisplayAlertAsync("Error", "Please complete all inputs", "OK"); //return an error message if any input is null
+                return;
             }
 
-            
+
+
         }catch(Exception ex)
         {
             await App.Current.MainPage.DisplayAlertAsync("Error", "Cannot update note", "OK");
         }
+    }
+
+    //validate password won't be null method
+    private async Task <bool> ValidPassword()
+    {
+        //return an error if password is null
+        if(string.IsNullOrWhiteSpace(password))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    //validate that inputs won't be null
+    private async Task <bool> ValidNoteInputs()
+    {
+        //return an error  if title or content is null
+        if (string.IsNullOrWhiteSpace(note.Title) || string.IsNullOrWhiteSpace(decryptedContent))
+        {
+           
+            return false;
+        }
+       
+
+        return true;
     }
 
     //prompt user to confirm the update
