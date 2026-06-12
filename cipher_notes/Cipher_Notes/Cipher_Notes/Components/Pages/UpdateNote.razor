@@ -32,7 +32,7 @@
     {
         //display a form with note's info but allow user to edit content
         <div class="update-form">
-            <input @bind="note.Title" />
+            <input @bind="note.Title" class="title-input" />
             <textarea @bind="decryptedContent"></textarea>
             <button @onclick="Update">Save</button>
             <button @onclick="GoBack">Back</button>
